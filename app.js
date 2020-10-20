@@ -4,6 +4,8 @@ const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
 const helmet = require('helmet');
+const movies = require('./movies');
+
 
 const app = express();
 
@@ -20,6 +22,47 @@ app.use(function validateBearerToken(req, res, next) {
   }
   // move to the next middleware
   next();
+});
+
+//make a function that takes in a endpoint get movie and return 
+// compare the strings to see if strings are included and return 
+
+// searching by average vote if the average vote is greater than or equal to supllier number 
+// {
+//     "filmtv_ID": 2,
+//     "film_title": "Bugs Bunny's Third Movie: 1001 Rabbit Tales",
+//     "year": 1982,
+//     "genre": "Animation",
+//     "duration": 76,
+//     "country": "United States",
+//     "director": "David Detiege, Art Davis, Bill Perez",
+//     "actors": "N/A",
+//     "avg_vote": 7.7,
+//     "votes": 28
+//   },
+
+function search(req, res){
+  console.log('i am inside the search function');
+  const { search } = req.query;
+  let  newResult = '';
+  if(search){
+    newResult = movies.filter(movie => movie.gender.toLowerCase().includes(search.toLowerCase())
+    );  
+    res.json(newResult);
+
+  }
+
+ 
+
+}
+
+
+
+
+app.get('/movie', search);
+
+app.listen(8000, ()=> {
+  console.log('server is running');
 });
 
 
