@@ -45,18 +45,18 @@ function search(req, res){
   console.log('i am inside the search function');
   const { genre, vote, country} = req.query;
   let  newResult = movies;
-  console.log('very', newResult);
+  // console.log('very', newResult);
   if(genre){
     newResult = newResult.filter(movie => movie.genre.toLowerCase().includes(genre.toLowerCase())
     );
-    console.log('first search',newResult);
+    // console.log('first search',newResult);
   }  
   
   if(country){
     newResult = newResult.filter(movie => movie.country.toLowerCase().includes(country.toLowerCase())
     );
       
-    console.log('second search', newResult);
+    // console.log('second search', newResult);
 
 
   }
@@ -65,7 +65,7 @@ function search(req, res){
     newResult = newResult.filter(movie => movie.avg_vote >= vote);
 
   }
-  console.log(newResult);
+  // console.log(newResult);
 
   res.json(newResult);
 }
@@ -75,9 +75,9 @@ function search(req, res){
 
 app.get('/movie', search);
 
-app.listen(8000, ()=> {
-  console.log('server is running');
-});
 
+// app.listen(8000, ()=> {
+//   console.log('server is running');
+// });
 
-
+module.exports = app;
